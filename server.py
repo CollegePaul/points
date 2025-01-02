@@ -15,6 +15,7 @@ from smbus2 import SMBus
 import time
 import socket
 import signal #for safe shutdown
+import sys
 
 # I2C address of the Arduino
 I2C_ADDRESS = 0x08
@@ -59,6 +60,7 @@ def updateState():
 
 app = Flask(__name__)
 socketio = SocketIO(app)
+print(type(socketio))
 
 @app.route('/')
 def index():
@@ -106,6 +108,16 @@ def shutdown_server():
 def handle_exit(sig, frame):
     shutdown_server()
     sys.exit(0)
+
+def shutdown_server2(exception=None):
+    socketio.emit('server_shutdown', {'data': 'Server shutting down'}, namespace='/')
+    print("Server shutting down...")
+
+@app.teardown_appcontext
+def teardown_context(exception):
+    shutdown_server2(exception)
+
+
 
 signal.signal(signal.SIGINT, handle_exit)
 signal.signal(signal.SIGTERM, handle_exit)
