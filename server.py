@@ -43,6 +43,7 @@ def write_to_arduino(data):
             print(f"Error writing to Arduino: {e}")
 
 def updateState():
+    global lines
     if lines[0] == 0 and lines[1]==0:
          print("Both lines off")
          write_to_arduino(0b00)
@@ -83,6 +84,8 @@ def handle_disconnect():
 @socketio.on('connect')
 def handle_connect():
     print('Client connected')
+    global lines
+    lines = [0,0]
 
 # Graceful shutdown handler
 def graceful_shutdown():
