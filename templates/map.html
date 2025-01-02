@@ -58,9 +58,7 @@ function drawCentral(){
     ctx.moveTo(100, 100);   
     ctx.lineTo(700, 100);    
     ctx.stroke();
-    if (setup == true) {
-        setup = false
-    }else{
+    if (setup == false) {
         socket.emit('button_pressed', 1);
     }
     
