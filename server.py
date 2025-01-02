@@ -70,11 +70,6 @@ def handle_button_press(data):
     print(f"Button pressed: {data}")  # Receive and print the button's value
     emit('response', {'message': f"Button {data} pressed!"})
 
-    if data == 3: #quit
-        print("Exiting --------------------------")
-        SocketIO.stop()
-        sys.exit(0)
-
     # update button values
     if lines[data-1] == 0:    # button 1 is data-1  hence 0 index in line
         lines[data-1] = 1

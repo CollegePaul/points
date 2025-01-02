@@ -35,7 +35,7 @@ button {
 
 <button id="btn1" onclick="drawCentral()">Cental line</button>
 <button id="btn2" onclick="drawOther()">Other Line</button>
-<button id="close" onclick="quit()">quit</button>
+
 <script>
 
 var socket = io();
@@ -77,10 +77,6 @@ function drawOther(){
     }else{
         socket.emit('button_pressed', 2);
     }
-}
-
-function quit(){
-    socket.emit('button_pressed', 3);
 }
 
 
