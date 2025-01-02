@@ -71,7 +71,7 @@ def handle_button_press(data):
 
     if data == 3: #quit
         print("Exiting --------------------------")
-        socketio.stop()
+        app.stop()
         exit(1)
 
     # update button values
