@@ -50,10 +50,10 @@ def updateState():
          write_to_arduino(0b11)
     if lines[0] == 1 and lines[1]==0:
          print("Central line on")
-         write_to_arduino(0b11)
+         write_to_arduino(0b10)
     if lines[0] == 0 and lines[1]==1:
          print("Other line on")
-         write_to_arduino(0b11)
+         write_to_arduino(0b01)
 
 app = Flask(__name__)
 socketio = SocketIO(app)
