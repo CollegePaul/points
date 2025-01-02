@@ -4,6 +4,7 @@
 <html>
 <head>
 <title>Canvas with Horizontal Lines</title>
+<script src="https://cdn.socket.io/4.5.4/socket.io.js"></script>
 <style>
 body {
   background-color: #f0f0f0;
@@ -15,12 +16,15 @@ canvas {
 
 button {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  left: 120px;
 }
 
 #btn1 {
-  left: 120px;
+  top: 80px;
+}
+
+#btn2 {
+  top: 280px;
 }
 
 </style>
@@ -33,37 +37,44 @@ button {
 <button id="btn2" onclick="drawOther()">Other Line</button>
 
 <script>
+var socket = io();
+
+
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 
-lineStates = [0,0]
-cols = ["black","blue"]
+lineStates = [1,1]
+cols = ["black","greenyellow"]
+
 
 
 function drawCentral(){
 
-    //toggle this line
-    lineStates[0] = !lineStates[0]
- 
-    ctx.strokeStyle = cols[];
-
+   //toggle state and change bool to int
+    lineStates[0] = !lineStates[0] ? 1 : 0;
+    ctx.strokeStyle = cols[lineStates[0]];
     ctx.beginPath();
     ctx.moveTo(100, 100);   
-    ctx.lineTo(100, 700);    
+    ctx.lineTo(700, 100);    
     ctx.stroke();
+    socket.emit('button_pressed', 1);
 }
 
 function drawOther(){
-
+    //toggle state and change bool to int
+    lineStates[1] = !lineStates[1] ? 1 : 0;   
+    ctx.strokeStyle = cols[lineStates[1]];
     ctx.beginPath();
-    ctx.moveTo(300, 100);   
-    ctx.lineTo(300, 700);    
+    ctx.moveTo(100, 300);   
+    ctx.lineTo(700, 300);    
     ctx.stroke();
+    socket.emit('button_pressed', 2);
 }
 
 
 //draw lines
-
+drawCentral()
+drawOther()
 
 
 
