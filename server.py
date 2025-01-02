@@ -44,7 +44,7 @@ def write_to_arduino(data):
 def updateState():
     x, y = lines
     val =  bin(x * 2 + y)  
-    write_to_arduino(val)
+    write_to_arduino(int(val))
     print("WRITING STATE: ", val)
 
 
