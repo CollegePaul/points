@@ -1,7 +1,6 @@
 On Pi:
 Enable I2C in raspi config
 
-Install smbus2
 Edit bootconfig:  (it was in:  sudo nano /boot/config.txt)
 but is now in:
 sudo nano /boot/firmware/config.txt
@@ -10,5 +9,34 @@ set the dtparams to on  (uncomment them) to  enable hardware interfaces.
 
 I did a reboot
 
-Test coms_test.py 
+Make VENV
+Install smbus2
+Install flask
+Install flask_socketio
 
+Arduino code in nano.io
+
+Test coms_test.py to check I2C
+
+Check flask and buttons with
+with templates/index.html
+
+main program:
+server.py
+templates/map.html
+
+i use a shell script to start it all running, run_server.sh  this is not actually in points folder, but 1 level above.
+
+_____________  TO DO _______________
+
+Cant seem to get the flask sever to aways stop correctly,  do not shut program down with CTRL-Z this only kills the python script,
+always use CRTL-C
+
+will try to get the program to get its own PID, and use this if needed
+
+
+ps aux | grep -i python           -shows python processes
+ps aux | grep -i flask
+
+pkill pid                         - use the pid from above
+pkill -n python                   - kill python processes  (newest process)
