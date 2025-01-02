@@ -1,19 +1,16 @@
-import smbus
+from smbus2 import SMBus
 import time
 
 # I2C address of the Arduino
 I2C_ADDRESS = 0x08
 
-# Function to send data to the Arduino via I2C
 def write_to_arduino(data):
-    bus = smbus.SMBus(1)  # Use I2C bus 1
-    try:
-        bus.write_byte(I2C_ADDRESS, data)
-        print(f"Data sent to Arduino: {data}")
-    except Exception as e:
-        print(f"Error writing to Arduino: {e}")
-    finally:
-        bus.close()
+    with SMBus(1) as bus:  # Use I2C bus 1
+        try:
+            bus.write_byte(I2C_ADDRESS, data)
+            print(f"Data sent to Arduino: {data}")
+        except Exception as e:
+            print(f"Error writing to Arduino: {e}")
 
 if __name__ == "__main__":
     while True:
