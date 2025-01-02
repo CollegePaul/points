@@ -14,6 +14,7 @@ from flask_socketio import SocketIO, emit
 from smbus2 import SMBus
 import time
 import socket
+import sys
 
 # I2C address of the Arduino
 I2C_ADDRESS = 0x08
@@ -71,8 +72,8 @@ def handle_button_press(data):
 
     if data == 3: #quit
         print("Exiting --------------------------")
-        app.stop()
-        exit(1)
+        socketio.stop(app)
+        sys.exit(0)
 
     # update button values
     if lines[data-1] == 0:    # button 1 is data-1  hence 0 index in line
