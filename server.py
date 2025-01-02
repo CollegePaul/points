@@ -14,8 +14,6 @@ from flask_socketio import SocketIO, emit
 from smbus2 import SMBus
 import time
 import socket
-import signal #for safe shutdown
-import sys
 
 # I2C address of the Arduino
 I2C_ADDRESS = 0x08
@@ -71,6 +69,11 @@ def handle_button_press(data):
     print(f"Button pressed: {data}")  # Receive and print the button's value
     emit('response', {'message': f"Button {data} pressed!"})
 
+    if data == 3: #quit
+        print("Exiting --------------------------")
+        socketio.stop()
+        exit(1)
+
     # update button values
     if lines[data-1] == 0:    # button 1 is data-1  hence 0 index in line
         lines[data-1] = 1
@@ -92,35 +95,6 @@ def handle_connect():
     lines = [0,0]
     updateState()
 
-# Graceful shutdown handler
-def graceful_shutdown():
-    print("Shutting down Flask server...")
-    lines = [0,0]
-    updateState()
-    socketio.stop() 
-
-#atexit.register(graceful_shutdown)   #does not seem to work
-
-def shutdown_server():
-    socketio.emit('server_shutdown', {'data': 'Server shutting down'}, namespace='/')
-    socketio.disconnect()
-
-def handle_exit(sig, frame):
-    shutdown_server()
-    sys.exit(0)
-
-def shutdown_server2(exception=None):
-    socketio.emit('server_shutdown', {'data': 'Server shutting down'}, namespace='/')
-    print("Server shutting down...")
-
-@app.teardown_appcontext
-def teardown_context(exception):
-    shutdown_server2(exception)
-
-
-
-signal.signal(signal.SIGINT, handle_exit)
-signal.signal(signal.SIGTERM, handle_exit)
 
 if __name__ == '__main__':  #ensure this is is run as the main program
     ip = get_ip()
