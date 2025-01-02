@@ -1,0 +1,75 @@
+<!-- WIP -->
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Canvas with Horizontal Lines</title>
+<style>
+body {
+  background-color: #f0f0f0;
+}
+
+canvas {
+  border: 1px solid #ccc;
+}
+
+button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+#btn1 {
+  left: 120px;
+}
+
+</style>
+</head>
+<body>
+
+<canvas id="myCanvas" width="800" height="400"></canvas>
+
+<button id="btn1" onclick="drawCentral()">Cental line</button>
+<button id="btn2" onclick="drawOther()">Other Line</button>
+
+<script>
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+
+lineStates = [0,0]
+cols = ["black","blue"]
+
+
+function drawCentral(){
+
+    //toggle this line
+    lineStates[0] = !lineStates[0]
+ 
+    ctx.strokeStyle = cols[];
+
+    ctx.beginPath();
+    ctx.moveTo(100, 100);   
+    ctx.lineTo(100, 700);    
+    ctx.stroke();
+}
+
+function drawOther(){
+
+    ctx.beginPath();
+    ctx.moveTo(300, 100);   
+    ctx.lineTo(300, 700);    
+    ctx.stroke();
+}
+
+
+//draw lines
+
+
+
+
+
+
+</script>
+
+</body>
+</html>
