@@ -42,11 +42,10 @@ def write_to_arduino(data):
             print(f"Error writing to Arduino: {e}")
 
 def updateState():
-    x, y = lines
-    val =  x * 2 + y 
-    write_to_arduino(bin(val))
-    print("WRITING STATE: ", bin(val))
-
+    if lines[0] == 0 and lines[1]==0:
+         write_to_arduino(0b00)
+    if lines[0] == 1 and lines[1]==1:
+         write_to_arduino(0b11)
 
 app = Flask(__name__)
 socketio = SocketIO(app)
