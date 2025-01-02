@@ -89,10 +89,9 @@ def graceful_shutdown():
     print("Shutting down Flask server...")
     socketio.stop() 
 
+atexit.register(graceful_shutdown)
 
 if __name__ == '__main__':  #ensure this is is run as the main program
     ip = get_ip()
     print("Server Running on: ", ip)
-    atexit.register(graceful_shutdown)
-
     socketio.run(app, debug=True, host=ip, port=5000)
