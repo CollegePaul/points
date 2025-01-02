@@ -37,6 +37,12 @@ button {
 <button id="btn2" onclick="drawOther()">Other Line</button>
 
 <script>
+if ( window.history.replaceState ) {
+    window.history.replaceState( null, null, window.location.href );
+}
+window.location = window.location.href;
+
+
 var socket = io();
 
 
