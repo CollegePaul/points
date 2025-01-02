@@ -59,6 +59,8 @@ def handle_button_press(data):
     if data == 2:
         write_to_arduino(0b10)
 
+        
+
 if __name__ == '__main__':  #ensure this is is run as the main program
     ip = get_ip()
     print("Server Running on: ", ip)

@@ -14,6 +14,7 @@ from flask_socketio import SocketIO, emit
 from smbus2 import SMBus
 import time
 import socket
+import atexit  #for safe shutdown
 
 # I2C address of the Arduino
 I2C_ADDRESS = 0x08
@@ -75,6 +76,20 @@ def handle_button_press(data):
 
     updateState()
 
+@socketio.on('disconnect')
+def handle_disconnect():
+    print('Client disconnected')
+
+@socketio.on('connect')
+def handle_connect():
+    print('Client connected')
+
+# Graceful shutdown handler
+def graceful_shutdown():
+    print("Shutting down Flask server...")
+    socketio.stop() 
+
+atexit.register(graceful_shutdown)
 
 if __name__ == '__main__':  #ensure this is is run as the main program
     ip = get_ip()
