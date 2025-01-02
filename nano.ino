@@ -6,8 +6,8 @@ const int ledPin2 = 8;
 void setup() {
   pinMode(ledPin1, OUTPUT);
   pinMode(ledPin2, OUTPUT);
-  //digitalWrite(ledPin1, 0);
-  //digitalWrite(ledPin2, 0));
+  digitalWrite(ledPin1, 0);
+  digitalWrite(ledPin2, 0);
   Wire.begin(8); // Join I2C bus with address 8
   Wire.onReceive(receiveEvent); // Register event for receiving data
 }
