@@ -43,9 +43,9 @@ var socket = io();
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 
-lineStates = [1,1]
+lineStates = [0,0]
 cols = ["black","greenyellow"]
-
+setup = true
 
 
 function drawCentral(){
@@ -57,7 +57,12 @@ function drawCentral(){
     ctx.moveTo(100, 100);   
     ctx.lineTo(700, 100);    
     ctx.stroke();
-    socket.emit('button_pressed', 1);
+    if (setup == true) {
+        setup == false
+    }else{
+        socket.emit('button_pressed', 1);
+    }
+    
 }
 
 function drawOther(){
@@ -68,7 +73,11 @@ function drawOther(){
     ctx.moveTo(100, 300);   
     ctx.lineTo(700, 300);    
     ctx.stroke();
-    socket.emit('button_pressed', 2);
+    if (setup == true) {
+        setup == false
+    }else{
+        socket.emit('button_pressed', 2);
+    }
 }
 
 
