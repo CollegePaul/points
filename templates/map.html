@@ -58,7 +58,7 @@ function drawCentral(){
     ctx.lineTo(700, 100);    
     ctx.stroke();
     if (setup == true) {
-        setup == false
+        setup = false
     }else{
         socket.emit('button_pressed', 1);
     }
@@ -74,7 +74,7 @@ function drawOther(){
     ctx.lineTo(700, 300);    
     ctx.stroke();
     if (setup == true) {
-        setup == false
+        setup = false
     }else{
         socket.emit('button_pressed', 2);
     }
