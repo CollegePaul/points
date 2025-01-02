@@ -1,0 +1,14 @@
+On Pi:
+Enable I2C in raspi config
+
+Install smbus2
+Edit bootconfig:  (it was in:  sudo nano /boot/config.txt)
+but is now in:
+sudo nano /boot/firmware/config.txt
+
+set the dtparams to on  (uncomment them) to  enable hardware interfaces.
+
+I did a reboot
+
+Test coms_test.py 
+
