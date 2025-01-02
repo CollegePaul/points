@@ -53,7 +53,7 @@ socketio = SocketIO(app)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('map.html')
 
 @socketio.on('button_pressed')
 def handle_button_press(data): 
