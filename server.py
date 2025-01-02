@@ -43,8 +43,16 @@ def write_to_arduino(data):
 
 def updateState():
     if lines[0] == 0 and lines[1]==0:
+         print("Both lines off")
          write_to_arduino(0b00)
     if lines[0] == 1 and lines[1]==1:
+         print("Both lines on")
+         write_to_arduino(0b11)
+    if lines[0] == 1 and lines[1]==0:
+         print("Central line on")
+         write_to_arduino(0b11)
+    if lines[0] == 0 and lines[1]==1:
+         print("Other line on")
          write_to_arduino(0b11)
 
 app = Flask(__name__)
