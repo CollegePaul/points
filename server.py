@@ -80,6 +80,8 @@ def handle_button_press(data):
 @socketio.on('disconnect')
 def handle_disconnect():
     print('Client disconnected')
+    lines = [0,0]
+    updateState()
 
 @socketio.on('connect')
 def handle_connect():
@@ -91,6 +93,8 @@ def handle_connect():
 # Graceful shutdown handler
 def graceful_shutdown():
     print("Shutting down Flask server...")
+    lines = [0,0]
+    updateState()
     socketio.stop() 
 
 atexit.register(graceful_shutdown)
