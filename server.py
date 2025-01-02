@@ -86,6 +86,7 @@ def handle_connect():
     print('Client connected')
     global lines
     lines = [0,0]
+    updateState()
 
 # Graceful shutdown handler
 def graceful_shutdown():
